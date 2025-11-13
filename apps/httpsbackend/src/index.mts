@@ -97,7 +97,19 @@ if (cluster.isPrimary) {
       res.status(500).json({ message: "Internal server error" });
     }
   });
-
+  app.post("/destination",async (req:Request,res:Response)=>{
+    const { id, destination } = req.body;
+    try {
+      await prisma.user.update({
+        where: { id:id },
+        data: { destination },
+      });
+      res.status(200).send({ message:"destination added" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  })
   app.get("/", (req, res) => {
     res.send(`Server running on PID ${process.pid}`);
   });

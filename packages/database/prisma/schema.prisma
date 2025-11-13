@@ -8,7 +8,7 @@ datasource db {
 }
 
 model user {
-  id            Int     @id @default(autoincrement())
+  id            String     @id @default(uuid())
   Name          String
   Age           Int
   Email_Address String  @unique
@@ -19,4 +19,12 @@ model user {
   Contact_Phone String
   Relationship  String
   password      String
+  destination   String?
+}
+model location{
+  id          String @id @default(uuid())
+  uid         String
+  location    String
+  time        String
+  safe        Boolean
 }
