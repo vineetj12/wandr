@@ -1,0 +1,48 @@
+@import "tailwindcss";
+.landing-page {
+  @apply flex flex-col items-center justify-center min-h-screen 
+         text-center px-6 py-12 pt-24 bg-white text-black;
+}
+
+.landing-title {
+  @apply mb-10;
+}
+
+.entry-title {
+  @apply text-4xl md:text-5xl font-extrabold text-black mb-4 leading-tight;
+}
+
+.entry-subtitle {
+  @apply text-lg md:text-xl text-gray-700;
+}
+
+.landing-register {
+  @apply flex justify-center;
+}
+
+
+.register-button {
+  @apply inline-flex items-center justify-center gap-3
+         bg-black text-white font-semibold
+         text-lg px-8 py-4 rounded-full shadow-md
+         transition-transform duration-300 ease-out hover:scale-105 hover:bg-gray-900;
+}
+
+
+.reg-but-img {
+  @apply w-6 h-6 invert;
+}
+
+@media (min-width: 768px) {
+  .entry-title {
+    @apply text-5xl;
+  }
+
+  .entry-subtitle {
+    @apply text-xl;
+  }
+
+  .register-button {
+    @apply px-10 py-5 text-xl;
+  }
+}

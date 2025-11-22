@@ -1,0 +1,97 @@
+/* EmergencyContactsTailwind.css */
+@reference "tailwindcss";
+
+/* Main Page Container */
+.emergency-contacts-page {
+  @apply max-w-6xl mx-auto p-6 sm:p-10 bg-gray-50 min-h-screen flex flex-col gap-10;
+  font-family: sans-serif;
+}
+
+/* Page Heading */
+.emergency-contacts-page h2 {
+  @apply text-3xl sm:text-4xl font-bold text-black mb-4 text-center;
+}
+
+/* Back Button */
+.back-button {
+  @apply mb-6 inline-flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-full text-black font-medium text-base hover:bg-gray-100 transition duration-200;
+}
+
+/* Section Headings */
+.medical-info-section h3,
+.contacts-list-section h3,
+.add-contact-section h3 {
+  @apply text-xl sm:text-2xl font-semibold text-black mb-4;
+}
+
+/* Medical Info Section */
+.medical-info-section {
+  @apply bg-white p-6 rounded-2xl shadow-md flex flex-col gap-4;
+}
+
+.medical-info-section textarea {
+  @apply w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:bg-white transition-all duration-200;
+}
+
+.info-display p {
+  @apply text-gray-700;
+}
+
+.info-display button,
+.medical-info-section button {
+  @apply mt-2 self-start px-5 py-2 bg-black text-white rounded-xl font-semibold hover:bg-gray-800 transition duration-200;
+}
+
+/* Contacts List */
+.contacts-list-section {
+  @apply flex flex-col gap-4;
+}
+
+.contact-card {
+  @apply bg-white p-4 sm:p-6 rounded-2xl shadow-md flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 transition-all duration-200 hover:shadow-lg;
+}
+
+.contact-card input {
+  @apply p-3 border border-gray-300 rounded-xl w-full sm:w-auto flex-1 focus:outline-none focus:ring-2 focus:ring-black transition-all duration-200;
+}
+
+.delete-button {
+  @apply px-4 py-2 bg-red-500 text-white rounded-xl font-semibold hover:bg-red-600 transition duration-200 self-end sm:self-auto;
+}
+
+/* Add Contact Section */
+.add-contact-section {
+  @apply bg-white p-6 rounded-2xl shadow-md flex flex-col gap-4;
+}
+
+.contact-input-form {
+  @apply flex flex-col sm:flex-row gap-4 sm:gap-6 flex-wrap;
+}
+
+.contact-input-form input {
+  @apply p-3 border border-gray-300 rounded-xl flex-1 focus:outline-none focus:ring-2 focus:ring-black transition-all duration-200;
+}
+
+.contact-input-form button {
+  @apply px-6 py-3 bg-black text-white rounded-2xl font-semibold hover:bg-gray-800 transition duration-200 self-start sm:self-auto;
+}
+
+/* Horizontal Divider */
+hr {
+  @apply border-gray-200 my-6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .contact-card {
+    @apply flex-col items-start;
+  }
+
+  .contact-input-form {
+    @apply flex-col gap-4;
+  }
+
+  .back-button {
+    @apply w-full justify-center;
+  }
+}

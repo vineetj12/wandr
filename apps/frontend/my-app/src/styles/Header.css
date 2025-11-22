@@ -1,0 +1,39 @@
+@reference "tailwindcss";
+
+.header {
+  @apply w-full flex items-center justify-between 
+         bg-white shadow-md px-3 sm:px-4 md:px-6 py-3 
+         sticky top-0 z-50;
+}
+
+.left-header {
+  @apply flex items-center gap-3;
+}
+
+.left-header img {
+  @apply w-10 h-10;
+}
+
+.left-header h3 {
+  @apply text-lg font-semibold text-gray-800;
+}
+
+.right-header {
+  @apply flex items-center gap-4;
+}
+
+.action-button {
+  @apply bg-transparent border-none outline-none p-1 cursor-pointer;
+}
+
+.profile-link-wrapper img {
+  @apply w-8 h-8 rounded-full hover:scale-105 transition-transform duration-200;
+}
+
+.menu-toggle-button {
+  @apply bg-transparent border-none outline-none p-1 cursor-pointer;
+}
+
+.menu-toggle-button img {
+  @apply w-7 h-7 hover:rotate-90 transition-transform duration-300;
+}

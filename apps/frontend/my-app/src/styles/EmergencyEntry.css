@@ -1,0 +1,85 @@
+@reference "tailwindcss";
+
+.register-entry {
+  @apply flex justify-center items-start min-h-screen p-5 bg-gray-50;
+}
+
+.register-entry form {
+  @apply bg-white p-10 sm:p-8 rounded-3xl shadow-xl w-full max-w-lg transition-all duration-300 hover:shadow-2xl;
+}
+
+.success-notification {
+  @apply p-4 bg-green-100 text-green-800 rounded-lg font-semibold text-center shadow-lg;
+  @apply w-auto max-w-md mx-auto;
+  @apply transition-all duration-300 ease-out;
+}
+
+.heading-details {
+  @apply mb-8 border-b border-gray-200 pb-4;
+}
+
+.title-and-back {
+  @apply flex items-center mb-2 gap-4;
+}
+
+.back-button {
+  @apply w-10 h-10 rounded-full border border-gray-200 text-black flex items-center justify-center text-xl cursor-pointer transition-all duration-300 hover:bg-gray-100 hover:scale-105;
+}
+
+.heading-details h2 {
+  @apply text-2xl sm:text-3xl font-bold text-black m-0;
+}
+
+.heading-details h3 {
+  @apply text-gray-600 text-sm sm:text-base font-normal;
+}
+
+.emergency-contacts {
+  @apply grid grid-cols-1 gap-y-6 mb-10;
+}
+
+.emergency-contacts h4 {
+  @apply text-lg font-semibold text-black mb-4 border-b border-gray-300 pb-2;
+}
+
+.emergency-contacts label {
+  @apply flex flex-col text-gray-700 text-sm sm:text-base;
+}
+
+.emergency-contacts input,
+.emergency-contacts textarea {
+  @apply mt-2 p-4 border border-gray-300 rounded-xl bg-gray-50
+         focus:outline-none focus:ring-2 focus:ring-black
+         focus:bg-white transition-all duration-300 hover:border-gray-400;
+}
+
+.emergency-contacts textarea {
+  @apply resize-none h-28;
+}
+
+.emergency-contacts input::placeholder,
+.emergency-contacts textarea::placeholder {
+  @apply text-gray-400;
+}
+
+.next-button2 {
+  @apply flex justify-center mt-6;
+}
+
+.next-button2 button {
+  @apply bg-black text-white px-8 py-3 rounded-2xl text-base font-semibold cursor-pointer transition-all duration-300 shadow-lg hover:bg-gray-800 hover:scale-105;
+}
+
+.emergency-contacts section {
+  @apply bg-white p-6 rounded-2xl shadow-sm;
+}
+
+@media (max-width: 640px) {
+  .register-entry form {
+    @apply p-6 shadow-md;
+  }
+
+  .heading-details h2 {
+    @apply text-xl;
+  }
+}
