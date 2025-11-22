@@ -1,0 +1,106 @@
+@reference 'tailwindcss';
+
+
+/* 🌍 Base layout */
+.leaflet-container {
+  @apply relative flex flex-col lg:flex-row h-screen overflow-hidden bg-white;
+}
+
+/* 🧭 Sidebar */
+.sidebar {
+  @apply p-5 bg-white shadow-2xl lg:w-96 w-full shrink-0 z-10 lg:h-full overflow-y-auto border-r border-gray-200;
+}
+
+.sidebar-title {
+  @apply text-3xl font-extrabold text-black mb-2 flex items-center;
+}
+
+.sidebar-subtitle {
+  @apply text-sm text-gray-500 mb-4;
+}
+
+/* 🛣️ Route Info */
+.route-info {
+  @apply bg-gray-50 p-4 rounded-xl shadow-inner mb-4;
+}
+
+.route-heading {
+  @apply text-lg font-semibold text-gray-800 mb-2;
+}
+
+.route-details {
+  @apply space-y-2 text-sm;
+}
+
+.label {
+  @apply font-medium text-gray-500 flex items-center;
+}
+
+.value {
+  @apply font-bold text-gray-700 ml-6;
+}
+
+/* ⚡ Status Card */
+.status-card {
+  @apply p-4 mb-4 rounded-xl border flex items-center shadow-md transition-all duration-500;
+}
+
+.status-text {
+  @apply font-bold text-sm;
+}
+
+.status-green {
+  @apply bg-green-100 border-green-300 text-green-700;
+}
+
+.status-yellow {
+  @apply bg-yellow-100 border-yellow-400 text-yellow-700;
+}
+
+.status-red {
+  @apply bg-red-100 border-red-400 text-red-700 animate-pulse;
+}
+
+.status-gray {
+  @apply bg-gray-100 border-gray-300 text-gray-700;
+}
+
+/* 🧾 Info block */
+.info-block {
+  @apply space-y-4 border-t pt-4;
+}
+
+.info-title {
+  @apply font-semibold text-gray-700 block mb-1;
+}
+
+.info-value {
+  @apply font-mono text-sm text-gray-600 bg-gray-50 p-2 rounded;
+}
+
+.risk-score {
+  @apply font-extrabold text-3xl;
+}
+
+.risk-note {
+  @apply text-xs text-gray-500 mt-1;
+}
+
+/* 🧪 Dev Mode Notice */
+.dev-mode {
+  @apply mt-8 p-3 text-xs bg-gray-50 border border-gray-200 rounded-lg text-gray-500 italic;
+}
+
+/* 🗺️ Map Wrapper */
+.map-wrapper {
+  @apply relative grow w-full h-full;
+}
+
+.map-view {
+  @apply absolute inset-0 z-0;
+}
+
+/* ➕ Floating Button */
+.floating-btn {
+  @apply absolute bottom-5 right-5 bg-black text-white rounded-full w-12 h-12 flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-transform duration-200 z-20;
+}

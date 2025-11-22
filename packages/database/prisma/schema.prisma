@@ -1,29 +1,33 @@
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
 }
 
-model user {
+model User {
   id            String     @id @default(uuid())
-  Name          String
-  Age           Int
-  Email_Address String  @unique
-  Phone_Number  String
-  Nationality   String
-  Adhaar_Number String?
-  Contact_Name  String
-  Contact_Phone String
-  Relationship  String
+  name          String
+  age           Int
+  emailAddress  String     @unique
+  phoneNumber   String
+  nationality   String
+  adhaarNumber  String?
+  contactName   String
+  contactPhone  String
+  relationship  String
   password      String
-  destination   String?
+  location      Location?  // optional back-reference, no fields/references
 }
-model location{
-  id          String @id @default(uuid())
-  uid         String
-  location    String
-  time        String
-  safe        Boolean
+
+model Location {
+  id           String  @id @default(uuid())
+  uid          String  @unique
+  location     String
+  destination  String?
+  time         String
+  safe         Boolean
+  user         User     @relation(fields: [uid], references: [id]) // foreign key side
 }

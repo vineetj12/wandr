@@ -2,10 +2,12 @@ import express, { Request, Response } from "express";
 import cluster from "cluster";
 import os from "os";
 import bcrypt from "bcrypt";
-import { PrismaClient } from "@prisma/client";
-
+import {prismaClient as prisma} from "@repo/database/client" 
+import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "@repo/commonbackend/config";
+import { authenticateJWT } from "./middleware.js";
+import { AuthenticatedRequest } from "./middleware.js";
 const totalcpu = os.cpus().length;
-const prisma = new PrismaClient();
 
 if (cluster.isPrimary) {
   console.log(`Number of CPUs: ${totalcpu}`);
@@ -43,7 +45,7 @@ if (cluster.isPrimary) {
         return res.status(400).json({ message: "Email and password are required" });
 
       const existingUser = await prisma.user.findUnique({
-        where: { Email_Address },
+        where: { emailAddress:Email_Address },
       });
 
       if (existingUser)
@@ -53,15 +55,15 @@ if (cluster.isPrimary) {
 
       const newUser = await prisma.user.create({
         data: {
-          Name: Name || "",
-          Age: Age || 0,
-          Email_Address,
-          Phone_Number: Phone_Number || "",
-          Nationality: Nationality || "",
-          Adhaar_Number: Adhaar_Number || "",
-          Contact_Name: Contact_Name || "",
-          Contact_Phone: Contact_Phone || "",
-          Relationship: Relationship || "",
+          name: Name || "",
+          age: Age || 0,
+          emailAddress:Email_Address,
+          phoneNumber: Phone_Number || "",
+          nationality: Nationality || "",
+          adhaarNumber: Adhaar_Number || "",
+          contactName: Contact_Name || "",
+          contactPhone: Contact_Phone || "",
+          relationship: Relationship || "",
           password: hashedPassword,
         },
       });
@@ -81,7 +83,7 @@ if (cluster.isPrimary) {
         return res.status(400).json({ message: "Email and password are required" });
 
       const user = await prisma.user.findUnique({
-        where: { Email_Address },
+        where: { emailAddress:Email_Address },
       });
 
       if (!user)
@@ -91,29 +93,65 @@ if (cluster.isPrimary) {
       if (!valid)
         return res.status(401).json({ message: "Invalid password" });
 
-      res.status(200).json({ message: "Signin successful", user });
+      const token = jwt.sign(
+        { id: user.id },          
+        JWT_SECRET,              
+        { expiresIn: "1h" }      
+      );
+      res.status(200).json({ message: "Signin successful", token });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Internal server error" });
     }
   });
-  app.post("/destination",async (req:Request,res:Response)=>{
-    const { id, destination } = req.body;
-    try {
-      await prisma.user.update({
-        where: { id:id },
-        data: { destination },
+  
+app.post("/destination", authenticateJWT, async (req: AuthenticatedRequest, res: Response) => {
+  const userId = req.user?.id;
+  if (!userId) return res.status(401).json({ message: "Unauthorized" });
+
+  const { destination, time, location, safe } = req.body;
+
+  if (!destination || !time) 
+    return res.status(400).json({ message: "Destination and time are required" });
+
+  try {
+    const existingLocation = await prisma.location.findUnique({
+      where: { uid: userId },
+    });
+
+    if (existingLocation) {
+      await prisma.location.update({
+        where: { uid: userId },
+        data: { destination, time },
       });
-      res.status(200).send({ message:"destination added" });
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ message: "Internal server error" });
+      return res.status(200).json({ message: "Destination and time updated successfully" });
+    } else {
+      if (!location || safe === undefined) {
+        return res.status(400).json({
+          message: "Missing required fields to create a new Location: location, safe",
+        });
+      }
+
+      await prisma.location.create({
+        data: {
+          uid: userId,
+          location,
+          destination,
+          time,
+          safe,
+        },
+      });
+      return res.status(201).json({ message: "Destination and time created successfully" });
     }
-  })
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
   app.get("/", (req, res) => {
     res.send(`Server running on PID ${process.pid}`);
   });
-
+  
   app.listen(3030, () => {
     console.log(`Server running on http://localhost:3030 (PID: ${process.pid})`);
   });

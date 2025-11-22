@@ -1,0 +1,96 @@
+@reference "tailwindcss";
+
+.register-entry {
+  @apply flex justify-center items-center min-h-screen p-5 bg-gray-50;
+}
+
+.register-entry form {
+  @apply bg-white p-10 sm:p-8 rounded-3xl shadow-xl max-w-3xl w-full transition-all duration-300 hover:shadow-2xl;
+}
+
+/* Headings */
+.heading-details {
+  @apply mb-8 border-b border-gray-200 pb-4;
+}
+
+.title-and-back {
+  @apply flex items-center mb-2 gap-4;
+}
+
+.back-button {
+  @apply w-10 h-10 rounded-full border border-gray-200 text-black flex items-center justify-center text-xl cursor-pointer transition-all duration-300 hover:bg-gray-100 hover:scale-105;
+}
+
+.heading-details h2 {
+  @apply text-2xl sm:text-3xl font-bold text-black m-0;
+}
+
+.heading-details h3 {
+  @apply text-gray-600 text-sm sm:text-base font-normal;
+}
+
+/* Personal Details Form - SINGLE COLUMN */
+.personal-details {
+  @apply grid grid-cols-1 gap-y-6 mb-10;
+}
+
+.personal-details .full-width-input {
+  @apply col-span-1;
+}
+
+.personal-details h4 {
+  @apply text-lg font-semibold text-black mb-4 border-b border-gray-300 pb-2 flex items-center gap-2;
+}
+
+/* Input Fields */
+.personal-details label {
+  @apply flex flex-col text-gray-700 text-sm sm:text-base;
+}
+
+.personal-details input {
+  @apply mt-2 p-4 border border-gray-300 rounded-xl bg-gray-50
+         focus:outline-none focus:ring-2 focus:ring-black focus:bg-white
+         transition-all duration-300 hover:border-gray-400;
+}
+
+.personal-details input::placeholder {
+  @apply text-gray-400;
+}
+
+/* Buttons */
+.next-button1 {
+  @apply flex justify-center mt-6;
+}
+
+.next-button1 button {
+  @apply bg-black text-white px-8 py-3 rounded-2xl text-base font-semibold cursor-pointer transition-all duration-300 shadow-lg hover:bg-gray-800 hover:scale-105;
+}
+
+/* Register Button with Icon */
+.register-button {
+  @apply flex items-center gap-2 px-4 py-2 bg-black text-white rounded-xl text-sm font-medium cursor-pointer transition-all duration-300 hover:bg-blue-600 hover:scale-105;
+}
+
+.reg-but-img {
+  @apply w-6 h-6;
+}
+
+/* Section Card Backgrounds */
+.personal-details section {
+  @apply bg-white p-6 rounded-2xl shadow-sm;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .register-entry form {
+    @apply p-6 shadow-md;
+  }
+
+  .personal-details {
+    @apply gap-y-4;
+  }
+
+  .heading-details h2 {
+    @apply text-xl;
+  }
+}

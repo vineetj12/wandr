@@ -12,17 +12,21 @@
   },
   "dependencies": {
     "@prisma/client": "^6.19.0",
+    "@repo/database": "*",
     "bcrypt": "^5.1.1",
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "@repo/commonbackend":"*"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.11.30",
+    "concurrently": "^8.2.0",
+    "nodemon": "^3.0.1",
     "prisma": "^6.19.0",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.6.3",
-    "concurrently": "^8.2.0",
-    "nodemon": "^3.0.1"
+    "typescript": "^5.6.3"
   }
 }
