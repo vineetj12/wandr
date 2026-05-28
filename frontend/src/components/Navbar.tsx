@@ -11,6 +11,7 @@ export default function Navbar({ onSearch }: NavbarProps) {
   const { user, logout } = useAuth();
   const router = useRouter();
   const [dropOpen, setDropOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
   const dropRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -20,6 +21,12 @@ export default function Navbar({ onSearch }: NavbarProps) {
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, []);
+
+  useEffect(() => {
+    if (!onSearch) return undefined;
+    const timeout = setTimeout(() => onSearch(searchValue), 300);
+    return () => clearTimeout(timeout);
+  }, [onSearch, searchValue]);
 
   const initials = user?.name?.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase() || 'W';
 
@@ -41,7 +48,8 @@ export default function Navbar({ onSearch }: NavbarProps) {
                   type="text"
                   placeholder="Search your trips..."
                   className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-400 transition-all"
-                  onChange={(e) => onSearch(e.target.value)}
+                  value={searchValue}
+                  onChange={(e) => setSearchValue(e.target.value)}
                 />
               </div>
             </div>
@@ -70,10 +78,16 @@ export default function Navbar({ onSearch }: NavbarProps) {
                     <p className="text-sm font-semibold text-slate-800 truncate">{user?.name}</p>
                     <p className="text-xs text-slate-500 truncate">{user?.email}</p>
                   </div>
-                  <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 transition-colors">
+                  <button
+                    onClick={() => { setDropOpen(false); router.push('/profile'); }}
+                    className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+                  >
                     <User size={15} className="text-slate-400" /> Profile
                   </button>
-                  <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 transition-colors">
+                  <button
+                    onClick={() => { setDropOpen(false); router.push('/settings'); }}
+                    className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+                  >
                     <Settings size={15} className="text-slate-400" /> Settings
                   </button>
                   <div className="border-t border-slate-100 mt-1" />
