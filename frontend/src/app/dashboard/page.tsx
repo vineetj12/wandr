@@ -89,7 +89,14 @@ export default function DashboardPage() {
     return h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening';
   };
 
-  const uniqueCountries = new Set(trips.map((t) => t.destination?.split(',')[1]?.trim()).filter(Boolean)).size;
+  const uniqueCountries = new Set(
+    trips
+      .map((t) => {
+        const parts = t.destination?.split(',').map((p) => p.trim()).filter(Boolean) || [];
+        return parts.length > 1 ? parts[parts.length - 1] : parts[0];
+      })
+      .filter(Boolean)
+  ).size;
   const totalDays = trips.reduce((acc, t) => acc + (t.days || 0), 0);
 
   return (
